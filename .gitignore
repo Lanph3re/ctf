@@ -1,0 +1,3 @@
+*.idb
+core
+.gdb_history
