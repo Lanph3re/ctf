@@ -80,11 +80,11 @@ In fact, we can write arbitrary data with deposit menu. but while deposit menu g
 
 Exploit scenario is
 
-1. 적당히 큰 chunk를 할당 후 해제(libc leak)
-2. tcache에 들어갈 정도의 chunk 할당 후 해제
-3. fd pointer overwrite를 해서 이후 malloc에서 __free_hook을 할당 받음
-4. __free_hook에 one_gadget의 주소를 overwrite
-5. free 호출
+1. alloc a chunk that is large enough and free it(libc leak)
+2. alloc a chunk that is suitable size in tcache and free.
+3. overwrite fd pointer and get the pointer of __free_hook
+4. overwrite __free_hook with one_gadget
+5. call free
 
 ```
 from pwn import *
