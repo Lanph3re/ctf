@@ -19,7 +19,7 @@ In main, there is buffer that can store 0x108 bytes. snprintf func has vulnerabi
 
 snprintf returns the length of result string printed at buffer if buffer was large enough.
 Though snprintf limits the length of result string by 0x104, it can return the value larger than 0x104.
-It's because g_buffer and g_key are adjacent. We send 0x100 non-null bytes in get_message(), then
+**It's because g_buffer and g_key are adjacent.** We send 0x100 non-null bytes in get_message(), then
 `sprintf(..., g_buffer)` returns `0x100 + length of g_key`. Eventually this vulnerability enables
 reading and writing main func's stackframe.
 
@@ -48,6 +48,9 @@ ssize_t get_message()
 .bss:00000000002020E0                               
 .bss:00000000002021E0 ; char g_key[264]
 .bss:00000000002021E0 g_key           db 108h dup(?)
+```
+
+Exploit code is as follows.
 ```
 from pwn import *
 
