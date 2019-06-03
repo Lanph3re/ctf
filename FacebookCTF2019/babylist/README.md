@@ -18,32 +18,6 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$
 It looks like heap challenge. List structure is as follows.
 
 ```
-void __cdecl create_list()
-{
-  __int64 v0; // rax
-  list *new_list; // rbx
-  __int64 v2; // rax
-  signed int i; // [rsp+Ch] [rbp-14h]
-
-  for ( i = 0; i <= 9 && lists[i]; ++i )
-    ;
-  if ( i == 10 )
-  {
-    v0 = std::operator<<<std::char_traits<char>>((__int64)&std::cout, (__int64)"Sorry, no empty spot available :(");
-  }
-  else
-  {
-    new_list = (list *)operator new(0x88uLL);
-    ptr_initialize((__int64)new_list);
-    lists[i] = new_list;
-    v2 = std::operator<<<std::char_traits<char>>((__int64)&std::cout, (__int64)"Enter name for list:");
-    std::ostream::operator<<(v2, &std::endl<char,std::char_traits<char>>);
-    std::istream::getline((std::istream *)&std::cin, lists[i]->name, 0x70LL);
-    v0 = std::operator<<<std::char_traits<char>>((__int64)&std::cout, (__int64)"List has been created!");
-  }
-  std::ostream::operator<<(v0, &std::endl<char,std::char_traits<char>>);
-}
-
 typedef list {
   char name[0x70];
   int *start; /* address of the first element in array */
