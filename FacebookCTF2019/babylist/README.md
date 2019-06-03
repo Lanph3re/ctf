@@ -40,7 +40,7 @@ doesn't allocate new array and copies, instead copies start, last, limit pointer
 3. Add a element in A. Then A gets newly allocated array(start, last, limit).
 4. Array that B has is freed memory.
 
-Also if we add a element in B, array that B is again freed(double free). We can use this vulnerability later in exploit.
+Also if we add a element in B, array that B has is again freed(double free). We can use this vulnerability later in exploit.
 To leak the address of libc,
 1. Make a list. and add elements until the size of array becomes large enough(larger than 0x80, which is fastbin chunk).
 2. Add elements so that array gets full.
