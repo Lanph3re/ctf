@@ -51,7 +51,7 @@ To leak the address of libc,
     - The last eighth free puts the chunk into unsorted bin.
 5. View the value of first, second elements in 9th list.
     - Array of 9th list is pointer of freed chunk in unsorted bin.
-    - first, second bytes are the address of somewhere in main_arena
+    - First, second bytes are the address of somewhere in main_arena
     - We can get base address of libc.
 
 After libc leak, the exploit scenario is as follows.
