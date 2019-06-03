@@ -29,7 +29,7 @@ typedef list {
 start, last, limit pointers points address of memory that is dynamically allocated.
 When we add a element to list, the element added to array and last pointer is increased by 4(size of element).
 
-When we add first element to list, the start pointer is initialized via `operator new(1)`. and internally(in binary)
+When we add first element to list, the start pointer is initialized via `operator new(4)`. and internally(in binary)
 it can store only one element. Each time the array is full, existing array is freed(deleted) and new array is allocated.
 The size of array gets doubled each time.
 
