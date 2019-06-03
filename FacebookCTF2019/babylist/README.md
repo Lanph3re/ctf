@@ -46,31 +46,31 @@ To leak the address of libc,
 2. Add elements so that array gets full.
 3. Duplicate the list 8 times.
 4. Add a elements in each list except the the last list.
-  - The same array is freed 8 times.
-  - Binary uses glibc 2.27 which implements tcache. With first 7 frees, tcache gets saturated.
-  - The last eighth free puts the chunk into unsorted bin.
+    - The same array is freed 8 times.
+    - Binary uses glibc 2.27 which implements tcache. With first 7 frees, tcache gets saturated.
+    - The last eighth free puts the chunk into unsorted bin.
 5. View the value of first, second elements in 9th list.
-  - Array of 9th list is pointer of freed chunk in unsorted bin.
-  - first, second bytes are the address of somewhere in main_arena
-  - We can get base address of libc.
+    - Array of 9th list is pointer of freed chunk in unsorted bin.
+    - first, second bytes are the address of somewhere in main_arena
+    - We can get base address of libc.
 
 After libc leak, the exploit scenario is as follows.
 1. Make a list and add elements until the size of array becomes 0x91(including chunk header)
-  - The reason we do this step is 0x91 is the same as the size of 'list' structure.
+    - The reason we do this step is 0x91 is the same as the size of 'list' structure.
 2. Duplicate this list 2 times.
 3. Add a element in two lists.
-  - Array is double freed. (tcache -> p -> p)
+    - Array is double freed. (tcache -> p -> p)
 4. Make a list with its name value of address of __free_hook. (tcache -> p)
 5. Make a list with its name value of "/bin/sh\x00". (tcache -> __free_hook)
-  - Array of third list is '/bin/sh\x00'
-  - Let's call this array A.
+    - Array of third list is '/bin/sh\x00'
+    - Let's call this array A.
 6. Make a list with its name value of address of system
-  - __free_hook is allocated.
+    - __free_hook is allocated.
 7. Add a element in 3rd list.
-  - A is freed. That is, free(A)
-  - __free_hook is overwritten with system and A has "/bin/sh"
-  - free(A) is system("/bin/sh");
-8. Get shelL!
+    - A is freed. That is, free(A)
+    - __free_hook is overwritten with system and A has "/bin/sh"
+    - free(A) is system("/bin/sh");
+8. Get shell!
 
 ```
 from pwn import *
