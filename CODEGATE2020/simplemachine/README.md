@@ -125,11 +125,11 @@ instruction has four parts:
 - operand 3(2 bytes)
 
 and instruction parts consists of 4 parts.
-- reg_2_type: decides whether uses immediate value or value in memory for register 2.
-- reg_1_type: decides whether uses immediate value or value in memory for register 1.
-- mem_write: decides whether write values in memory. 
+- reg_2_type: decides whether uses immediate value or value in memory for register 2
+- reg_1_type: decides whether uses immediate value or value in memory for register 1
+- mem_write: decides whether machine stores values in memory
 - opcode: decides which operation machine executes
-  - 0: move value from register 1 to rax-like register
+  - 0: mov
   - 1: add
   - 2: mul
   - 3: xor
@@ -139,9 +139,9 @@ and instruction parts consists of 4 parts.
   - 7: write (register 2) bytes to stdout
   - 8: terminate machine
 ```
-+-------------------------------------------------------------------------------+
++----------------------------------------------------------------------------------+
 +  reg_2_type(3-bit)  |  reg_1_type(3-bit)  |  mem_write(3-bit)  |  opcode(7-bit)  |
-+-------------------------------------------------------------------------------+
++----------------------------------------------------------------------------------+
 ```
 
 mem_fetch() considers several forwarding logic of pipeline.
@@ -208,18 +208,18 @@ LABEL_3:
 
 In short, flag verification is as follows.
 1. In early part of instructions
-   1. reads two bytes from input
-   2. add some two-byte value with read value in step 1
-   3. check if sum is 0. if value is 0, process dies.
-   4. this means input should be two's complement of two-byte value
-   5. from this part I could figure out that flag starts with "CODEGATE2020"
+   * reads two bytes from input
+   * add some two-byte value with read value in step 1
+   * check if sum is 0. if value is 0, process dies.
+   * this means input should be two's complement of two-byte value
+   * from this part I could figure out that flag starts with "CODEGATE2020"
 2. Latter part
-   1. 0xdead is used as initial key
-   2. calculate key = (key * 2) ^ key;
-   3. xor two bytes from input and key
-   4. add result in step 3 and some two-byte value
-   5. result in step 4 should be 0.
-   6. goto step 2 and repeat
+   * 0xdead is used as initial key
+   * calculate key = (key * 2) ^ key;
+   * xor two bytes from input and key
+   * add result in step 3 and some two-byte value
+   * result in step 4 should be 0.
+   * goto step 2 and repeat
 
 With either manual debugging or automation using script, challenge is solved.
 ```
