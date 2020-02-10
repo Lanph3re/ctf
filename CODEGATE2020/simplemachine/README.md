@@ -148,7 +148,7 @@ mem_fetch() considers several forwarding logic of pipeline.
 
 Logic is very complicated, and in fact is not needed to be reverse engineered.
 
-What I wanted to know is values fetched to registers.
+What are important are values fetched to registers.
 
 It's enough to break on execute() and what values are used and what operation is executed.
 
