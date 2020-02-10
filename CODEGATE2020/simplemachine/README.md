@@ -146,7 +146,7 @@ and instruction parts consists of 4 parts.
 
 mem_fetch() considers several forwarding logic of pipeline.
 
-Logic is very complicated, and in fact is not need to be reverse engineered.
+Logic is very complicated, and in fact is not needed to be reverse engineered.
 
 What I wanted to know is values fetched to registers.
 
