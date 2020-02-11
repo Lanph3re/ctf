@@ -140,7 +140,7 @@ and instruction parts consists of 4 parts.
   - 8: terminate machine
 ```
 +----------------------------------------------------------------------------------+
-+  reg_2_type(3-bit)  |  reg_1_type(3-bit)  |  mem_write(3-bit)  |  opcode(7-bit)  |
+|  reg_2_type(3-bit)  |  reg_1_type(3-bit)  |  mem_write(3-bit)  |  opcode(7-bit)  |
 +----------------------------------------------------------------------------------+
 ```
 
